@@ -1,23 +1,16 @@
 import os
-import time
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 import cv2
 import numpy as np
+import time
 
-def contar_moedas(imagem, max_size=5000):
+def contar_moedas(imagem):
     start_time = time.time()
     
     # Verificar se a biblioteca necessária está instalada
     try:
         imagem = Image.open(imagem)
-        
-        # Reduzir a resolução da imagem, se necessário
-        if max(imagem.size) > max_size:
-            scale = max_size / max(imagem.size)
-            new_size = (int(imagem.width * scale), int(imagem.height * scale))
-            imagem = imagem.resize(new_size, Image.ANTIALIAS)
-        
         imagem = np.array(imagem)
     except ImportError:
         print("Erro: a biblioteca PIL (Pillow) não está instalada.")
@@ -42,14 +35,15 @@ def contar_moedas(imagem, max_size=5000):
         cv2.drawContours(imagem, [contorno], -1, (0, 255, 0), 2)
 
     # Salvar a imagem de saída
-    cv2.imwrite("moedas250.tiff", imagem)
+    cv2.imwrite("moedas4.10.tiff", imagem)
 
     # Retornar o número de moedas
-    print(f"Tempo de execução: {time.time() - start_time} segundos")
+    execution_time = (time.time() - start_time)/60
+    print(f"Tempo de execução: {execution_time} minutos")
     return len(contornos)
 
 # Testar a função
-if os.path.exists('moedas220.tiff'):
-    print(contar_moedas('moedas220.tiff'))
+if os.path.exists('moedas4321.tiff'):
+    print(contar_moedas('moedas4321.tiff'))
 else:
-    print("Erro: a imagem 'moedas250.tiff' não foi encontrada.")
+    print("Erro: a imagem 'moedas1234.tiff' não foi encontrada.")
