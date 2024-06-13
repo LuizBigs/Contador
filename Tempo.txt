@@ -1,0 +1,5 @@
+Serial 
+Moedas321.tiff = 4,76 min 220
+Moedas123.tiff = 4,47 min 225
+Moedas1234.tiff = 4,92 min 230
+Moedas4321.tiff = 5,28 min 235
